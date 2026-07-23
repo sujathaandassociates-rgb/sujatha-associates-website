@@ -1,88 +1,161 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-export default function Home() {
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Practice Areas", href: "/practice-areas" },
+  { name: "Our Approach", href: "/our-approach" },
+  { name: "Contact", href: "/contact" },
+];
+
+function isActiveRoute(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <main className="min-h-screen bg-[#f6f0e4] text-[#173027]">
-      <Navbar />
+    <header className="sticky top-0 z-50 border-b border-[#14342f]/10 bg-[#f8f5ef]/95 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
+        <Link
+          href="/"
+          aria-label="Sujatha and Associates home"
+          className="flex items-center"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <Image
+            src="/sujatha-logo.png"
+            alt="Sujatha and Associates"
+            width={190}
+            height={76}
+            priority
+            className="h-14 w-auto object-contain"
+          />
+        </Link>
 
-      <section className="mx-auto grid min-h-[calc(100vh-6rem)] max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:px-10">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#a67b32]">
-            Trusted legal representation
-          </p>
+        <nav
+          aria-label="Primary navigation"
+          className="hidden items-center gap-7 lg:flex"
+        >
+          {navigation.map((item) => {
+            const active = isActiveRoute(pathname, item.href);
 
-          <h1 className="mt-6 max-w-3xl font-serif text-5xl leading-tight sm:text-6xl lg:text-7xl">
-            Legal counsel built on{" "}
-            <span className="italic text-[#a67b32]">integrity</span> and
-            experience.
-          </h1>
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative py-2 text-sm font-medium transition ${
+                  active
+                    ? "text-[#b78a35]"
+                    : "text-[#14342f]/70 hover:text-[#14342f]"
+                }`}
+              >
+                {item.name}
 
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-[#173027]/70">
-            Sujatha and Associates provides thoughtful, dependable, and
-            client-focused legal representation for individuals, families,
-            and businesses.
-          </p>
+                <span
+                  className={`absolute inset-x-0 -bottom-1 mx-auto h-0.5 bg-[#b78a35] transition-all ${
+                    active ? "w-full" : "w-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
+        </nav>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+        <div className="hidden lg:block">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full bg-[#14342f] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#b78a35]"
+          >
+            Book Consultation
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMenuOpen((current) => !current)}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#14342f]/15 text-[#14342f] transition hover:border-[#14342f]/40 lg:hidden"
+        >
+          {isMenuOpen ? (
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            >
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          ) : (
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            >
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="border-t border-[#14342f]/10 bg-[#f8f5ef] px-6 py-6 lg:hidden"
+        >
+          <div className="mx-auto flex max-w-7xl flex-col">
+            {navigation.map((item) => {
+              const active = isActiveRoute(pathname, item.href);
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`border-b border-[#14342f]/10 py-4 text-base font-medium transition ${
+                    active
+                      ? "text-[#b78a35]"
+                      : "text-[#14342f]/75 hover:text-[#14342f]"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+
             <Link
               href="/contact"
-              className="rounded-full bg-[#173027] px-8 py-4 text-center text-sm font-semibold text-white"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-[#14342f] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#b78a35]"
             >
               Book Consultation
             </Link>
-
-            <Link
-              href="/practice-areas"
-              className="rounded-full border border-[#a67b32] px-8 py-4 text-center text-sm font-semibold"
-            >
-              Explore Practice Areas
-            </Link>
           </div>
-        </div>
-
-        <div className="rounded-3xl bg-[#173027] p-8 text-white shadow-xl">
-          <div className="flex justify-center">
-            <Image
-              src="/sujatha-logo.png"
-              alt="Sujatha and Associates"
-              width={420}
-              height={360}
-              priority
-              className="h-auto w-full max-w-[340px] object-contain"
-            />
-          </div>
-
-          <div className="mt-8 border-t border-white/15 pt-6">
-            <a
-              href="tel:+919036931203"
-              className="block text-lg text-white"
-            >
-              Call: +91 90369 31203
-            </a>
-
-            <a
-              href="https://wa.me/919036931203?text=Hello%2C%20I%20would%20like%20to%20book%20a%20legal%20consultation%20with%20Sujatha%20and%20Associates."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 block text-lg text-[#d7b66d]"
-            >
-              WhatsApp: 9036931203
-            </a>
-
-            <address className="mt-5 not-italic leading-7 text-white/70">
-              No. 320/58, 1st Floor,
-              <br />
-              6th Cross, Muneshwara Nagar,
-              <br />
-              Ullal Main Road,
-              <br />
-              Bangalore - 560056
-            </address>
-          </div>
-        </div>
-      </section>
-    </main>
+        </nav>
+      )}
+    </header>
   );
 }
