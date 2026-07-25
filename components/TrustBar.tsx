@@ -1,52 +1,68 @@
 const trustItems = [
   {
-    number: "01",
     title: "Client Focused",
     description:
-      "Every matter is approached with attention, discretion and a clear understanding of the client’s priorities.",
+      "Every matter is approached with attention, discretion and a clear understanding of the client's priorities.",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 fill-current">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z" />
+      </svg>
+    ),
   },
   {
-    number: "02",
-    title: "Experienced Representation",
+    title: "Experienced Team",
     description:
       "Practical legal guidance supported by experience, preparation and careful strategy.",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 fill-current">
+        <path d="M12 2L1 21h22L12 2Zm0 4.5L19.5 19h-15L12 6.5ZM11 10v4h2v-4h-2Zm0 6v2h2v-2h-2Z" />
+      </svg>
+    ),
   },
   {
-    number: "03",
-    title: "Clear Communication",
+    title: "Trusted Representation",
     description:
       "Clients receive straightforward guidance and timely updates throughout the legal process.",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 fill-current">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9Z" />
+      </svg>
+    ),
   },
   {
-    number: "04",
-    title: "Practical Legal Strategy",
+    title: "Timely & Effective",
     description:
       "Focused solutions designed around the facts, the law and the most effective path forward.",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 fill-current">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm.5 11H7v-1h5.5V7h1v6Z" />
+      </svg>
+    ),
   },
 ];
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-[#14342f]/10 bg-white">
-      <div className="mx-auto grid max-w-7xl divide-y divide-[#14342f]/10 px-6 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4 lg:px-10">
+    <section className="bg-[#14342f] py-10">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-10">
         {trustItems.map((item) => (
           <article
-            key={item.number}
-            className="group relative px-0 py-9 sm:px-8 lg:px-7"
+            key={item.title}
+            className="group flex items-start gap-4"
           >
-            <div className="absolute bottom-0 left-0 h-px w-0 bg-[#b78a35] transition-all duration-500 group-hover:w-full" />
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#d6b56c]/15 text-[#d6b56c] transition duration-300 group-hover:bg-[#d6b56c]/25">
+              {item.icon}
+            </div>
 
-            <p className="text-xs font-semibold tracking-[0.24em] text-[#b78a35]">
-              {item.number}
-            </p>
+            <div>
+              <h2 className="text-base font-semibold tracking-[-0.01em] text-white">
+                {item.title}
+              </h2>
 
-            <h2 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#14342f]">
-              {item.title}
-            </h2>
-
-            <p className="mt-3 text-sm leading-6 text-[#14342f]/60">
-              {item.description}
-            </p>
+              <p className="mt-1.5 text-sm leading-5 text-white/55">
+                {item.description}
+              </p>
+            </div>
           </article>
         ))}
       </div>

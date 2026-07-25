@@ -39,7 +39,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setIsMenuOpen(false);
+    // Close mobile menu on route change
+    setIsMenuOpen(false); // eslint-disable-line react-hooks/set-state-in-effect
   }, [pathname]);
 
   useEffect(() => {

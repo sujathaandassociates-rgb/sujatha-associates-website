@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
-
-const whatsappUrl =
-  "https://wa.me/919036931203?text=Hello%2C%20I%20would%20like%20to%20book%20a%20legal%20consultation%20with%20Sujatha%20and%20Associates.";
-
-const mapUrl =
-  "https://maps.app.goo.gl/vKtvydEATHjWBGnM8?g_st=ic";
+import {
+  WHATSAPP_URL,
+  PHONE_NUMBER,
+  MAP_URL,
+  ADDRESS_LINES,
+} from "@/lib/constants";
 
 export default function Hero() {
   return (
@@ -16,7 +17,6 @@ export default function Hero() {
         <div>
           <div className="flex items-center gap-4">
             <span className="h-px w-12 bg-[#a87928]" />
-
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#8a641f]">
               Trusted legal representation
             </p>
@@ -60,37 +60,34 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <div className="absolute -inset-5 rounded-[2.5rem] border border-[#9a712b]/35" />
-
           <div className="relative overflow-hidden rounded-[2rem] border border-[#d6b56c]/35 bg-[#14342f] p-8 text-white shadow-2xl shadow-[#14342f]/25 sm:p-10">
             <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#d6b56c]/10 blur-3xl" />
 
             <div className="relative">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#e1c27c]">
-                Consultation
-              </p>
+              <div className="flex justify-center">
+                <div className="rounded-2xl bg-[#f8f5ef]/10 p-4">
+                  <Image
+                    src="/sujatha-logo.png"
+                    alt="Sujatha and Associates"
+                    width={140}
+                    height={56}
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
+              </div>
 
-              <h2 className="mt-5 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-                Speak with our office.
-              </h2>
-
-              <p className="mt-4 max-w-md leading-7 text-white/80">
-                Consultations are available by appointment. Contact the office
-                to discuss the appropriate next step.
-              </p>
-
-              <div className="mt-9 divide-y divide-white/15 border-y border-white/15">
+              <div className="mt-8 divide-y divide-white/15 border-y border-white/15">
                 <ContactRow
-                  label="Call us"
-                  value="+91 90369 31203"
+                  label="Call Us"
+                  value={PHONE_NUMBER}
                   href="tel:+919036931203"
                   icon={<PhoneIcon />}
                 />
 
                 <ContactRow
-                  label="WhatsApp"
-                  value="+91 90369 31203"
-                  href={whatsappUrl}
+                  label="WhatsApp Us"
+                  value={PHONE_NUMBER}
+                  href={WHATSAPP_URL}
                   external
                   icon={<WhatsAppIcon />}
                 />
@@ -102,21 +99,20 @@ export default function Hero() {
 
                   <div>
                     <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                      Visit our office
+                      Visit Our Office
                     </p>
 
                     <address className="mt-2 not-italic leading-7 text-white/85">
-                      No. 320/58, 1st Floor,
-                      <br />
-                      6th Cross, Muneshwara Nagar,
-                      <br />
-                      Ullal Main Road,
-                      <br />
-                      Bangalore – 560056
+                      {ADDRESS_LINES.map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i < ADDRESS_LINES.length - 1 && <br />}
+                        </span>
+                      ))}
                     </address>
 
                     <a
-                      href={mapUrl}
+                      href={MAP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#e1c27c] transition hover:text-white"

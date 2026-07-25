@@ -1,30 +1,38 @@
+import Link from "next/link";
+
 const practiceAreas = [
   {
+    slug: "civil-litigation",
     title: "Civil Litigation",
     description:
       "Representation in civil disputes, recovery matters, injunctions, contracts, and appellate proceedings.",
   },
   {
+    slug: "criminal-law",
     title: "Criminal Law",
     description:
       "Assistance in bail matters, complaints, trials, appeals, and criminal proceedings.",
   },
   {
+    slug: "property-law",
     title: "Property Law",
     description:
       "Support for property disputes, title verification, registrations, partitions, tenancy, and documentation.",
   },
   {
+    slug: "family-law",
     title: "Family Law",
     description:
       "Confidential assistance with divorce, maintenance, custody, domestic disputes, and succession.",
   },
   {
+    slug: "corporate-law",
     title: "Corporate Law",
     description:
       "Advice for contracts, compliance, commercial disputes, and business-related legal matters.",
   },
   {
+    slug: "consumer-law",
     title: "Consumer Law",
     description:
       "Representation in consumer complaints involving products, services, insurance, and real estate.",
@@ -45,9 +53,10 @@ export default function PracticeAreasPage() {
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-[#14342f]/10 bg-[#14342f]/10 md:grid-cols-2 lg:grid-cols-3">
           {practiceAreas.map((area, index) => (
-            <article
-              key={area.title}
-              className="group bg-white p-9 transition duration-300 hover:bg-[#14342f] hover:text-white"
+            <Link
+              key={area.slug}
+              href={`/practice-areas/${area.slug}`}
+              className="group block bg-white p-9 transition duration-300 hover:bg-[#14342f] hover:text-white"
             >
               <p className="text-xs tracking-[0.25em] text-[#b78a35]">
                 {String(index + 1).padStart(2, "0")}
@@ -60,7 +69,14 @@ export default function PracticeAreasPage() {
               <p className="mt-5 leading-7 text-current opacity-65">
                 {area.description}
               </p>
-            </article>
+
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">
+                Learn more
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </Link>
           ))}
         </div>
       </div>

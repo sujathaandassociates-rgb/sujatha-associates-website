@@ -1,28 +1,31 @@
 import Link from "next/link";
-import FadeIn from "./FadeIn";
 
 const practiceAreas = [
   {
     number: "01",
     title: "Family Law",
+    slug: "family-law",
     description:
       "Sensitive and practical guidance for matrimonial matters, divorce, maintenance, custody and family disputes.",
   },
   {
     number: "02",
     title: "Civil Litigation",
+    slug: "civil-litigation",
     description:
       "Strategic representation in civil disputes, recovery matters, injunctions and related proceedings.",
   },
   {
     number: "03",
     title: "Property Law",
+    slug: "property-law",
     description:
       "Legal assistance with property disputes, documentation, ownership issues and real-estate transactions.",
   },
   {
     number: "04",
     title: "Criminal Law",
+    slug: "criminal-law",
     description:
       "Careful and determined representation in criminal complaints, bail matters and court proceedings.",
   },
@@ -30,7 +33,7 @@ const practiceAreas = [
 
 export default function PracticePreview() {
   return (
-      <section className="bg-[#f8f5ef] py-24 sm:py-28">
+    <section className="bg-[#f8f5ef] py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>
@@ -57,7 +60,7 @@ export default function PracticePreview() {
           {practiceAreas.map((area) => (
             <Link
               key={area.number}
-              href="/practice-areas"
+              href={`/practice-areas/${area.slug}`}
               className="group relative overflow-hidden rounded-[1.75rem] border border-[#14342f]/12 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-[#b78a35]/60 hover:shadow-xl hover:shadow-[#14342f]/8 sm:p-10"
             >
               <div className="absolute right-0 top-0 h-28 w-28 translate-x-10 -translate-y-10 rounded-full bg-[#b78a35]/10 transition duration-500 group-hover:scale-125" />

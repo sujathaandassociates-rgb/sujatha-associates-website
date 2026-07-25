@@ -1,7 +1,5 @@
 import Link from "next/link";
-
-const whatsappUrl =
-  "https://wa.me/919036931203?text=Hello%2C%20I%20would%20like%20to%20book%20a%20legal%20consultation%20with%20Sujatha%20and%20Associates.";
+import { WHATSAPP_URL, PHONE_NUMBER, MAP_URL } from "@/lib/constants";
 
 export default function CTASection() {
   return (
@@ -40,7 +38,7 @@ export default function CTASection() {
             </Link>
 
             <a
-              href={whatsappUrl}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-white/30 px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-[#14342f]"
@@ -60,7 +58,7 @@ export default function CTASection() {
               href="tel:+919036931203"
               className="mt-2 block font-semibold text-white transition hover:text-[#d6b56c]"
             >
-              +91 90369 31203
+              {PHONE_NUMBER}
             </a>
           </div>
 
@@ -69,9 +67,15 @@ export default function CTASection() {
               Office
             </p>
 
-            <p className="mt-2 leading-7 text-white/75">
+            <a
+              href={MAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 block font-semibold text-white transition hover:text-[#d6b56c]"
+            >
               Ullal Main Road, Bangalore
-            </p>
+              <span className="ml-2 text-sm text-[#d6b56c]">→</span>
+            </a>
           </div>
 
           <div>

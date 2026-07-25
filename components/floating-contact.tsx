@@ -1,17 +1,10 @@
-const phoneNumber = "9036931203";
-
-const whatsappMessage =
-  "Hello, I would like to book a legal consultation with Sujatha and Associates.";
-
-const whatsappUrl = `https://wa.me/91${phoneNumber}?text=${encodeURIComponent(
-  whatsappMessage,
-)}`;
+import { PHONE_RAW, WHATSAPP_URL } from "@/lib/constants";
 
 export default function FloatingContact() {
   return (
     <div className="fixed bottom-5 right-5 z-[100] flex flex-col items-end gap-3">
       <a
-        href={`tel:+91${phoneNumber}`}
+        href={`tel:+91${PHONE_RAW}`}
         aria-label="Call Sujatha and Associates"
         className="flex h-12 items-center gap-2 rounded-full bg-[#11271f] px-4 text-sm font-semibold text-white shadow-xl transition hover:-translate-y-1 hover:bg-[#a77b2d]"
       >
@@ -27,7 +20,7 @@ export default function FloatingContact() {
       </a>
 
       <a
-        href={whatsappUrl}
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Sujatha and Associates on WhatsApp"

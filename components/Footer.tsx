@@ -1,5 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  WHATSAPP_URL,
+  PHONE_NUMBER,
+  MAP_URL,
+  ADDRESS_LINES,
+} from "@/lib/constants";
 
 const footerNavigation = [
   { name: "About", href: "/about" },
@@ -16,14 +22,14 @@ export default function Footer() {
           <Link
             href="/"
             aria-label="Sujatha and Associates home"
-            className="inline-flex rounded-2xl bg-[#f8f5ef] p-4"
+            className="inline-flex rounded-2xl p-2"
           >
             <Image
               src="/sujatha-logo.png"
               alt="Sujatha and Associates"
               width={210}
               height={90}
-              className="h-16 w-auto object-contain"
+              className="h-16 w-auto object-contain brightness-0 invert"
             />
           </Link>
 
@@ -61,11 +67,11 @@ export default function Footer() {
               href="tel:+919036931203"
               className="block transition hover:text-white"
             >
-              +91 90369 31203
+              {PHONE_NUMBER}
             </a>
 
             <a
-              href="https://wa.me/919036931203?text=Hello%2C%20I%20would%20like%20to%20book%20a%20legal%20consultation%20with%20Sujatha%20and%20Associates."
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="block transition hover:text-white"
@@ -74,14 +80,23 @@ export default function Footer() {
             </a>
 
             <address className="not-italic leading-7">
-              No. 320/58, 1st Floor,
-              <br />
-              6th Cross, Muneshwara Nagar,
-              <br />
-              Ullal Main Road,
-              <br />
-              Bangalore – 560056
+              {ADDRESS_LINES.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < ADDRESS_LINES.length - 1 && <br />}
+                </span>
+              ))}
             </address>
+
+            <a
+              href={MAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#d6b56c] transition hover:text-white"
+            >
+              View on Google Maps
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </div>

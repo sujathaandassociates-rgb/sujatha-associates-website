@@ -1,12 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-
-const whatsappUrl =
-  "https://wa.me/919036931203?text=Hello%2C%20I%20would%20like%20to%20book%20a%20legal%20consultation%20with%20Sujatha%20and%20Associates.";
-
-const mapUrl =
-  "https://maps.app.goo.gl/vKtvydEATHjWBGnM8?g_st=ic";
+import {
+  WHATSAPP_URL,
+  MAP_URL,
+  ADDRESS_LINES,
+} from "@/lib/constants";
 
 const legalMatters = [
   "Civil Litigation",
@@ -20,10 +19,41 @@ const legalMatters = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("fullName"),
+          phone: formData.get("phone"),
+          email: formData.get("email"),
+          practiceArea: formData.get("legalMatter"),
+          message: formData.get("message"),
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json();
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Unable to submit. Please try again or contact us directly.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -75,6 +105,12 @@ export default function ContactPage() {
               time-critical information in this initial enquiry.
             </p>
 
+            {error && (
+              <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                {error}
+              </div>
+            )}
+
             {submitted ? (
               <div
                 role="status"
@@ -96,30 +132,34 @@ export default function ContactPage() {
                 </div>
 
                 <p className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
-                  Form preview complete
+                  Submission received
                 </p>
 
                 <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">
-                  Your consultation form is ready.
+                  Your consultation request has been submitted.
                 </h3>
 
                 <p className="mt-4 max-w-xl leading-7 text-[#14342f]/65">
-                  Secure form delivery will be connected during the backend
-                  phase. For immediate assistance, please call or contact the
-                  office through WhatsApp.
+                  Our team will review your enquiry and contact you regarding
+                  the appropriate next step. For immediate assistance, please
+                  call or contact the office through WhatsApp.
                 </p>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <button
                     type="button"
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false);
+                      const form = document.querySelector("form");
+                      if (form) form.reset();
+                    }}
                     className="rounded-full border border-[#14342f]/20 px-6 py-3 text-sm font-semibold transition hover:border-[#14342f] hover:bg-white"
                   >
-                    Return to form
+                    Submit another enquiry
                   </button>
 
                   <a
-                    href={whatsappUrl}
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-full bg-[#25D366] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#1ebe5d]"
@@ -169,25 +209,36 @@ export default function ContactPage() {
                   />
                 </FormField>
 
-                <FormField label="Type of legal matter" htmlFor="legalMatter">
-                  <select
-                    id="legalMatter"
-                    name="legalMatter"
-                    required
-                    defaultValue=""
-                    className="form-input"
-                  >
-                    <option value="" disabled>
-                      Select a practice area
-                    </option>
-
-                    {legalMatters.map((matter) => (
-                      <option key={matter} value={matter}>
-                        {matter}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <FormField label="Type of legal matter" htmlFor="legalMatter">
+                    <select
+                      id="legalMatter"
+                      name="legalMatter"
+                      required
+                      defaultValue=""
+                      className="form-input"
+                    >
+                      <option value="" disabled>
+                        Select a practice area
                       </option>
-                    ))}
-                  </select>
-                </FormField>
+
+                      {legalMatters.map((matter) => (
+                        <option key={matter} value={matter}>
+                          {matter}
+                        </option>
+                      ))}
+                    </select>
+                  </FormField>
+
+                  <FormField label="Preferred date" htmlFor="preferredDate">
+                    <input
+                      id="preferredDate"
+                      name="preferredDate"
+                      type="date"
+                      className="form-input"
+                    />
+                  </FormField>
+                </div>
 
                 <FormField
                   label="Brief description of your matter"
@@ -225,9 +276,10 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center rounded-full bg-[#14342f] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#b78a35]"
+                    disabled={loading}
+                    className="inline-flex items-center justify-center rounded-full bg-[#14342f] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#b78a35] disabled:opacity-60"
                   >
-                    Submit Consultation Request
+                    {loading ? "Submitting..." : "Submit Consultation Request"}
                   </button>
                 </div>
               </form>
@@ -269,14 +321,23 @@ export default function ContactPage() {
                   </p>
 
                   <address className="mt-2 not-italic leading-7 text-white/70">
-                    No. 320/58, 1st Floor,
-                    <br />
-                    6th Cross, Muneshwara Nagar,
-                    <br />
-                    Ullal Main Road,
-                    <br />
-                    Bangalore – 560056
+                    {ADDRESS_LINES.map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        {i < ADDRESS_LINES.length - 1 && <br />}
+                      </span>
+                    ))}
                   </address>
+
+                  <a
+                    href={MAP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#d6b56c] transition hover:text-white"
+                  >
+                    View on Google Maps
+                    <span aria-hidden="true">→</span>
+                  </a>
                 </div>
 
                 <div className="pt-7">
@@ -292,7 +353,7 @@ export default function ContactPage() {
 
               <div className="mt-9 flex flex-col gap-3">
                 <a
-                  href={whatsappUrl}
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1ebe5d]"
@@ -301,7 +362,7 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href={mapUrl}
+                  href={MAP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-4 text-sm font-semibold transition hover:border-white/40 hover:bg-white/5"
