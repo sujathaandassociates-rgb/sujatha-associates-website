@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -55,8 +55,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         hasScrolled
-          ? "border-[#14342f]/10 bg-[#f8f5ef]/85 shadow-[0_10px_35px_rgba(20,52,47,0.08)] backdrop-blur-2xl"
-          : "border-transparent bg-[#f8f5ef]"
+          ? "border-primary/10 bg-surface/85 shadow-lg shadow-primary/10 backdrop-blur-2xl"
+          : "border-transparent bg-surface"
       }`}
     >
       <div
@@ -70,13 +70,8 @@ export default function Navbar() {
           className="relative z-50 flex items-center"
           onClick={() => setIsMenuOpen(false)}
         >
-          <Image
-            src="/sujatha-logo.png"
-            alt="Sujatha and Associates"
-            width={190}
-            height={76}
-            priority
-            className={`w-auto object-contain transition-all duration-300 ${
+          <Logo
+            className={`w-auto text-primary transition-all duration-300 ${
               hasScrolled ? "h-11" : "h-14"
             }`}
           />
@@ -95,15 +90,13 @@ export default function Navbar() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={`group relative py-2 text-sm font-medium transition-colors duration-300 ${
-                  active
-                    ? "text-[#9a712b]"
-                    : "text-[#294943] hover:text-[#14342f]"
+                  active ? "text-accent-strong" : "text-muted hover:text-ink"
                 }`}
               >
                 {item.name}
 
                 <span
-                  className={`absolute inset-x-0 -bottom-1 mx-auto h-px bg-[#b78a35] transition-all duration-300 ${
+                  className={`absolute inset-x-0 -bottom-1 mx-auto h-px bg-accent transition-all duration-300 ${
                     active ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -115,7 +108,7 @@ export default function Navbar() {
         <div className="hidden lg:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#14342f] px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[#9a712b] hover:shadow-lg"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-primary-raised hover:shadow-lg"
           >
             Book Consultation
             <span
@@ -129,11 +122,13 @@ export default function Navbar() {
 
         <button
           type="button"
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((current) => !current)}
-          className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[#14342f]/15 bg-white/40 text-[#14342f] transition duration-300 hover:border-[#14342f]/35 hover:bg-white lg:hidden"
+          className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full border border-primary/15 bg-surface-strong/40 text-ink transition duration-300 hover:border-primary/35 hover:bg-surface-strong lg:hidden"
         >
           <span className="sr-only">
             {isMenuOpen ? "Close menu" : "Open menu"}
@@ -170,7 +165,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "calc(100vh - 4rem)" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-[#14342f]/10 bg-[#f8f5ef]/98 backdrop-blur-2xl lg:hidden"
+            className="overflow-hidden border-t border-primary/10 bg-surface/98 backdrop-blur-2xl lg:hidden"
           >
             <div className="mx-auto flex h-full max-w-7xl flex-col px-6 py-8">
               <div className="flex flex-col">
@@ -191,10 +186,10 @@ export default function Navbar() {
                         href={item.href}
                         aria-current={active ? "page" : undefined}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`flex items-center justify-between border-b border-[#14342f]/10 py-5 text-xl font-medium transition-colors ${
+                        className={`flex items-center justify-between border-b border-primary/10 py-5 text-xl font-medium transition-colors ${
                           active
-                            ? "text-[#9a712b]"
-                            : "text-[#14342f] hover:text-[#9a712b]"
+                            ? "text-accent-strong"
+                            : "text-ink hover:text-accent-strong"
                         }`}
                       >
                         {item.name}
@@ -202,7 +197,7 @@ export default function Navbar() {
                         <span
                           aria-hidden="true"
                           className={`text-base ${
-                            active ? "text-[#9a712b]" : "text-[#14342f]/35"
+                            active ? "text-accent-strong" : "text-ink/35"
                           }`}
                         >
                           →
@@ -222,7 +217,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#14342f] px-6 py-4 text-sm font-semibold text-white transition duration-300 hover:bg-[#9a712b]"
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-primary px-6 py-4 text-sm font-semibold text-on-primary transition duration-300 hover:bg-primary-raised"
                 >
                   Book Consultation
                   <span aria-hidden="true">→</span>
@@ -230,7 +225,7 @@ export default function Navbar() {
 
                 <a
                   href="tel:+919036931203"
-                  className="mt-5 block text-center text-sm font-medium text-[#14342f]/65"
+                  className="mt-5 block text-center text-sm font-medium text-ink/65"
                 >
                   +91 90369 31203
                 </a>

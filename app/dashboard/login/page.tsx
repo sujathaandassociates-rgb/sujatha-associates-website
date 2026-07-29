@@ -38,18 +38,18 @@ export default function LoginPage() {
   }
 
   return (
-    <section className="flex min-h-[80vh] items-center justify-center bg-[#f8f5ef] px-6">
+    <section className="flex min-h-[80vh] items-center justify-center bg-[var(--brand-surface)] px-6">
       <div className="w-full max-w-md">
-        <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-8 shadow-2xl shadow-[#14342f]/5 sm:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+        <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-8 shadow-2xl shadow-[var(--brand-primary)]/5 sm:p-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
             Admin access
           </p>
 
-          <h1 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#14342f]">
+          <h1 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[var(--brand-primary)]">
             Sign in to Dashboard
           </h1>
 
-          <p className="mt-3 text-sm leading-6 text-[#14342f]/60">
+          <p className="mt-3 text-sm leading-6 text-[var(--brand-primary)]/60">
             Enter your credentials to access the admin panel.
           </p>
 
@@ -63,7 +63,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="email"
-                className="mb-2 block text-sm font-semibold text-[#14342f]"
+                className="mb-2 block text-sm font-semibold text-[var(--brand-primary)]"
               >
                 Email
               </label>
@@ -81,7 +81,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="mb-2 block text-sm font-semibold text-[#14342f]"
+                className="mb-2 block text-sm font-semibold text-[var(--brand-primary)]"
               >
                 Password
               </label>
@@ -99,7 +99,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex w-full items-center justify-center rounded-full bg-[#14342f] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#9a712b] disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand-primary)] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--brand-accent-strong)] disabled:opacity-60"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>

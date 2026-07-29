@@ -29,18 +29,18 @@ interface Booking {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  pending: "#d6b56c",
-  confirmed: "#22c55e",
-  rejected: "#ef4444",
+  pending: "var(--brand-accent-light)",
+  confirmed: "var(--brand-accent)",
+  rejected: "var(--brand-accent-strong)",
 };
 
 const PIE_COLORS = [
-  "#14342f",
-  "#b78a35",
-  "#36534d",
-  "#d6b56c",
-  "#9a712b",
-  "#173b35",
+  "var(--brand-primary)",
+  "var(--brand-accent)",
+  "var(--brand-muted)",
+  "var(--brand-accent-light)",
+  "var(--brand-accent-strong)",
+  "var(--brand-primary-raised)",
 ];
 
 export default function DashboardPage() {
@@ -89,7 +89,7 @@ export default function DashboardPage() {
       });
       if (res.ok) {
         setBookings((prev) =>
-          prev.map((b) => (b.id === id ? { ...b, status } : b))
+          prev.map((b) => (b.id === id ? { ...b, status } : b)),
         );
       }
     } catch {
@@ -100,9 +100,7 @@ export default function DashboardPage() {
   }
 
   const filtered =
-    filter === "all"
-      ? bookings
-      : bookings.filter((b) => b.status === filter);
+    filter === "all" ? bookings : bookings.filter((b) => b.status === filter);
 
   const statusCounts = {
     pending: bookings.filter((b) => b.status === "pending").length,
@@ -122,7 +120,7 @@ export default function DashboardPage() {
       (practiceAreaCounts[b.practiceArea] || 0) + 1;
   });
   const practiceAreaData = Object.entries(practiceAreaCounts).map(
-    ([name, value]) => ({ name, value })
+    ([name, value]) => ({ name, value }),
   );
 
   const dailyCounts: Record<string, number> = {};
@@ -138,11 +136,11 @@ export default function DashboardPage() {
     .slice(-14);
 
   return (
-    <section className="min-h-[80vh] bg-[#f8f5ef] px-6 py-10 text-[#14342f] lg:px-10">
+    <section className="min-h-[80vh] bg-[var(--brand-surface)] px-6 py-10 text-[var(--brand-primary)] lg:px-10">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
               Admin dashboard
             </p>
             <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
@@ -152,7 +150,7 @@ export default function DashboardPage() {
 
           <button
             onClick={handleSignOut}
-            className="inline-flex items-center justify-center rounded-full border border-[#14342f]/20 px-6 py-3 text-sm font-semibold transition hover:border-[#14342f] hover:bg-white"
+            className="inline-flex items-center justify-center rounded-full border border-[var(--brand-primary)]/20 px-6 py-3 text-sm font-semibold transition hover:border-[var(--brand-primary)] hover:bg-white"
           >
             Sign Out
           </button>
@@ -162,7 +160,7 @@ export default function DashboardPage() {
           <StatusCard
             label="Pending"
             count={statusCounts.pending}
-            color="bg-[#d6b56c]"
+            color="bg-[var(--brand-accent-light)]"
           />
           <StatusCard
             label="Confirmed"
@@ -177,34 +175,36 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-6 sm:p-8">
+          <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-6 sm:p-8">
             <h2 className="text-lg font-semibold">Bookings Over Time</h2>
             {timelineData.length > 0 ? (
               <div className="mt-6 h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={timelineData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="var(--brand-surface)"
+                    />
                     <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                     <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
                     <Tooltip />
                     <Bar
                       dataKey="count"
-                      fill="#14342f"
+                      fill="var(--brand-primary)"
                       radius={[4, 4, 0, 0]}
                     />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             ) : (
-              <p className="mt-6 text-sm text-[#14342f]/50">
-                No data yet. Bookings will appear here once submissions come
-                in.
+              <p className="mt-6 text-sm text-[var(--brand-primary)]/50">
+                No data yet. Bookings will appear here once submissions come in.
               </p>
             )}
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
-            <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-6 sm:p-8">
+            <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-6 sm:p-8">
               <h2 className="text-lg font-semibold">By Practice Area</h2>
               {practiceAreaData.length > 0 ? (
                 <div className="mt-4 h-48">
@@ -235,13 +235,13 @@ export default function DashboardPage() {
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <p className="mt-4 text-sm text-[#14342f]/50">
+                <p className="mt-4 text-sm text-[var(--brand-primary)]/50">
                   No data yet.
                 </p>
               )}
             </div>
 
-            <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-6 sm:p-8">
+            <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-6 sm:p-8">
               <h2 className="text-lg font-semibold">Status Breakdown</h2>
               {statusPieData.length > 0 ? (
                 <div className="mt-4 h-48">
@@ -259,9 +259,8 @@ export default function DashboardPage() {
                           <Cell
                             key={entry.name}
                             fill={
-                              STATUS_COLORS[
-                                entry.name.toLowerCase()
-                              ] || "#999"
+                              STATUS_COLORS[entry.name.toLowerCase()] ||
+                              "var(--brand-muted)"
                             }
                           />
                         ))}
@@ -271,7 +270,7 @@ export default function DashboardPage() {
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <p className="mt-4 text-sm text-[#14342f]/50">
+                <p className="mt-4 text-sm text-[var(--brand-primary)]/50">
                   No data yet.
                 </p>
               )}
@@ -279,7 +278,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-[2rem] border border-[#14342f]/10 bg-white p-6 sm:p-8">
+        <div className="mt-10 rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-6 sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-lg font-semibold">Appointments Queue</h2>
 
@@ -291,32 +290,34 @@ export default function DashboardPage() {
                     onClick={() => setFilter(s)}
                     className={`rounded-full px-4 py-2 text-xs font-semibold capitalize transition ${
                       filter === s
-                        ? "bg-[#14342f] text-white"
-                        : "bg-[#f8f5ef] text-[#14342f]/60 hover:text-[#14342f]"
+                        ? "bg-[var(--brand-primary)] text-white"
+                        : "bg-[var(--brand-surface)] text-[var(--brand-primary)]/60 hover:text-[var(--brand-primary)]"
                     }`}
                   >
                     {s}
                     {s !== "all" && (
                       <span className="ml-1">
-                        ({s === "pending"
+                        (
+                        {s === "pending"
                           ? statusCounts.pending
                           : s === "confirmed"
                             ? statusCounts.confirmed
-                            : statusCounts.rejected})
+                            : statusCounts.rejected}
+                        )
                       </span>
                     )}
                   </button>
-                )
+                ),
               )}
             </div>
           </div>
 
           {loading ? (
-            <div className="mt-8 text-center text-sm text-[#14342f]/50">
+            <div className="mt-8 text-center text-sm text-[var(--brand-primary)]/50">
               Loading appointments...
             </div>
           ) : filtered.length === 0 ? (
-            <div className="mt-8 text-center text-sm text-[#14342f]/50">
+            <div className="mt-8 text-center text-sm text-[var(--brand-primary)]/50">
               {bookings.length === 0
                 ? "No appointment requests yet. Submissions from the contact form will appear here."
                 : `No ${filter} appointments.`}
@@ -326,7 +327,7 @@ export default function DashboardPage() {
               {filtered.map((booking) => (
                 <div
                   key={booking.id}
-                  className="rounded-2xl border border-[#14342f]/8 bg-[#f8f5ef] p-5 transition hover:border-[#b78a35]/40 sm:p-6"
+                  className="rounded-2xl border border-[var(--brand-primary)]/8 bg-[var(--brand-surface)] p-5 transition hover:border-[var(--brand-accent)]/40 sm:p-6"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex-1">
@@ -337,7 +338,7 @@ export default function DashboardPage() {
                         <span
                           className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${
                             booking.status === "pending"
-                              ? "bg-[#d6b56c]/20 text-[#9a712b]"
+                              ? "bg-[var(--brand-accent-light)]/20 text-[var(--brand-accent-strong)]"
                               : booking.status === "confirmed"
                                 ? "bg-green-100 text-green-700"
                                 : "bg-red-100 text-red-700"
@@ -347,28 +348,28 @@ export default function DashboardPage() {
                         </span>
                       </div>
 
-                      <div className="mt-3 grid gap-2 text-sm text-[#14342f]/65 sm:grid-cols-2 lg:grid-cols-3">
+                      <div className="mt-3 grid gap-2 text-sm text-[var(--brand-primary)]/65 sm:grid-cols-2 lg:grid-cols-3">
                         <p>
-                          <span className="font-medium text-[#14342f]">
+                          <span className="font-medium text-[var(--brand-primary)]">
                             Phone:
                           </span>{" "}
                           {booking.phone}
                         </p>
                         <p>
-                          <span className="font-medium text-[#14342f]">
+                          <span className="font-medium text-[var(--brand-primary)]">
                             Email:
                           </span>{" "}
                           {booking.email}
                         </p>
                         <p>
-                          <span className="font-medium text-[#14342f]">
+                          <span className="font-medium text-[var(--brand-primary)]">
                             Practice Area:
                           </span>{" "}
                           {booking.practiceArea}
                         </p>
                         {booking.preferredDate && (
                           <p>
-                            <span className="font-medium text-[#14342f]">
+                            <span className="font-medium text-[var(--brand-primary)]">
                               Preferred Date:
                             </span>{" "}
                             {booking.preferredDate}
@@ -376,14 +377,14 @@ export default function DashboardPage() {
                         )}
                         {booking.preferredTime && (
                           <p>
-                            <span className="font-medium text-[#14342f]">
+                            <span className="font-medium text-[var(--brand-primary)]">
                               Preferred Time:
                             </span>{" "}
                             {booking.preferredTime}
                           </p>
                         )}
                         <p>
-                          <span className="font-medium text-[#14342f]">
+                          <span className="font-medium text-[var(--brand-primary)]">
                             Submitted:
                           </span>{" "}
                           {new Date(booking.createdAt).toLocaleDateString(
@@ -394,12 +395,12 @@ export default function DashboardPage() {
                               year: "numeric",
                               hour: "2-digit",
                               minute: "2-digit",
-                            }
+                            },
                           )}
                         </p>
                       </div>
 
-                      <p className="mt-3 text-sm leading-6 text-[#14342f]/70">
+                      <p className="mt-3 text-sm leading-6 text-[var(--brand-primary)]/70">
                         {booking.message}
                       </p>
                     </div>
@@ -407,9 +408,7 @@ export default function DashboardPage() {
                     {booking.status === "pending" && (
                       <div className="flex gap-2 sm:flex-col">
                         <button
-                          onClick={() =>
-                            updateStatus(booking.id, "confirmed")
-                          }
+                          onClick={() => updateStatus(booking.id, "confirmed")}
                           disabled={actionLoading === booking.id}
                           className="inline-flex items-center justify-center gap-2 rounded-full bg-green-600 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-green-700 disabled:opacity-50"
                         >
@@ -427,9 +426,7 @@ export default function DashboardPage() {
                         </button>
 
                         <button
-                          onClick={() =>
-                            updateStatus(booking.id, "rejected")
-                          }
+                          onClick={() => updateStatus(booking.id, "rejected")}
                           disabled={actionLoading === booking.id}
                           className="inline-flex items-center justify-center gap-2 rounded-full border border-red-200 px-5 py-2.5 text-xs font-semibold text-red-600 transition hover:bg-red-50 disabled:opacity-50"
                         >
@@ -468,10 +465,10 @@ function StatusCard({
   color: string;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-[#14342f]/10 bg-white p-6">
+    <div className="rounded-[1.5rem] border border-[var(--brand-primary)]/10 bg-white p-6">
       <div className="flex items-center gap-3">
         <span className={`h-3 w-3 rounded-full ${color}`} />
-        <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[#14342f]/60">
+        <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--brand-primary)]/60">
           {label}
         </p>
       </div>

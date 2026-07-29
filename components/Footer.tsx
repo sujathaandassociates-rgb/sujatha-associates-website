@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import {
   WHATSAPP_URL,
   PHONE_NUMBER,
@@ -16,7 +16,7 @@ const footerNavigation = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#14342f] text-white">
+    <footer className="bg-primary text-on-primary">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
         <div className="lg:col-span-2">
           <Link
@@ -24,23 +24,17 @@ export default function Footer() {
             aria-label="Sujatha and Associates home"
             className="inline-flex rounded-2xl p-2"
           >
-            <Image
-              src="/sujatha-logo.png"
-              alt="Sujatha and Associates"
-              width={210}
-              height={90}
-              className="h-16 w-auto object-contain brightness-0 invert"
-            />
+            <Logo className="h-20 w-auto text-accent-light" />
           </Link>
 
-          <p className="mt-6 max-w-md leading-7 text-white/65">
+          <p className="mt-6 max-w-md leading-7 text-on-primary-muted">
             Thoughtful, dependable and client-focused legal representation for
             individuals, families and businesses.
           </p>
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d6b56c]">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-accent-light">
             Explore
           </h2>
 
@@ -49,7 +43,7 @@ export default function Footer() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white/70 transition hover:text-white"
+                className="text-on-primary-muted transition hover:text-on-primary"
               >
                 {item.name}
               </Link>
@@ -58,14 +52,14 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d6b56c]">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-accent-light">
             Contact
           </h2>
 
-          <div className="mt-5 space-y-4 text-white/70">
+          <div className="mt-5 space-y-4 text-on-primary-muted">
             <a
               href="tel:+919036931203"
-              className="block transition hover:text-white"
+              className="block transition hover:text-on-primary"
             >
               {PHONE_NUMBER}
             </a>
@@ -74,7 +68,7 @@ export default function Footer() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="block transition hover:text-white"
+              className="block transition hover:text-on-primary"
             >
               WhatsApp
             </a>
@@ -92,7 +86,7 @@ export default function Footer() {
               href={MAP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#d6b56c] transition hover:text-white"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent-light transition hover:text-on-primary"
             >
               View on Google Maps
               <span aria-hidden="true">→</span>
@@ -102,15 +96,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-sm text-on-primary-muted/80 sm:flex-row sm:items-center sm:justify-between lg:px-10">
           <p>
             © {new Date().getFullYear()} Sujatha and Associates. All rights
             reserved.
           </p>
 
-          <p>
-            Website information does not constitute legal advice.
-          </p>
+          <p>Website information does not constitute legal advice.</p>
         </div>
       </div>
     </footer>

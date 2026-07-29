@@ -1,8 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #14342f;
+  --brand-primary: #153b34;
+  --brand-primary-raised: #1b4c43;
+  --brand-surface: #f7f3e9;
+  --brand-surface-strong: #fffdf8;
+  --brand-accent: #b58a3b;
+  --brand-accent-strong: #765414;
+  --brand-accent-light: #efd792;
+  --brand-ink: #182823;
+  --brand-muted: #40534d;
+  --brand-on-primary: #fffaf0;
+  --brand-on-primary-muted: #e8e1d2;
+  --background: var(--brand-surface);
+  --foreground: var(--brand-ink);
+}
+
+@theme inline {
+  --color-primary: var(--brand-primary);
+  --color-primary-raised: var(--brand-primary-raised);
+  --color-surface: var(--brand-surface);
+  --color-surface-strong: var(--brand-surface-strong);
+  --color-accent: var(--brand-accent);
+  --color-accent-strong: var(--brand-accent-strong);
+  --color-accent-light: var(--brand-accent-light);
+  --color-ink: var(--brand-ink);
+  --color-muted: var(--brand-muted);
+  --color-on-primary: var(--brand-on-primary);
+  --color-on-primary-muted: var(--brand-on-primary-muted);
 }
 
 * {
@@ -27,10 +52,10 @@ a {
 .form-input {
   width: 100%;
   border-radius: 1rem;
-  border: 1px solid rgb(20 52 47 / 0.15);
-  background: #f8f5ef;
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 15%, transparent);
+  background: var(--brand-surface);
   padding: 0.95rem 1rem;
-  color: #14342f;
+  color: var(--brand-ink);
   outline: none;
   transition:
     border-color 200ms ease,
@@ -39,11 +64,11 @@ a {
 }
 
 .form-input::placeholder {
-  color: rgb(20 52 47 / 0.4);
+  color: color-mix(in srgb, var(--brand-ink) 55%, transparent);
 }
 
 .form-input:focus {
-  border-color: #b78a35;
-  background: white;
-  box-shadow: 0 0 0 4px rgb(183 138 53 / 0.1);
+  border-color: var(--brand-accent);
+  background: var(--brand-surface-strong);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-accent) 20%, transparent);
 }

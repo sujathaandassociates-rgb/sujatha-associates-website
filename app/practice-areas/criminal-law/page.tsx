@@ -42,13 +42,12 @@ export default function CriminalLawPage() {
         },
         {
           heading: "Appeals & Revisions",
-          items:
-            [
-              "Criminal appeals to Higher Courts",
-              "Revision petitions",
-              "Review and recall applications",
-              "Transfer petitions",
-            ],
+          items: [
+            "Criminal appeals to Higher Courts",
+            "Revision petitions",
+            "Review and recall applications",
+            "Transfer petitions",
+          ],
         },
         {
           heading: "Specialised Criminal Matters",

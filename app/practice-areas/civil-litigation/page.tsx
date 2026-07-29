@@ -24,13 +24,12 @@ export default function CivilLitigationPage() {
         },
         {
           heading: "Injunctions & Interim Relief",
-          items:
-            [
-              "Temporary and permanent injunctions",
-              "Status quo orders",
-              "Mandatory and prohibitory injunctions",
-              "Ad interim relief applications",
-            ],
+          items: [
+            "Temporary and permanent injunctions",
+            "Status quo orders",
+            "Mandatory and prohibitory injunctions",
+            "Ad interim relief applications",
+          ],
         },
         {
           heading: "Contract & Commercial Disputes",

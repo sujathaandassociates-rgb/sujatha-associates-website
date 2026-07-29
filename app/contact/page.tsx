@@ -1,11 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import {
-  WHATSAPP_URL,
-  MAP_URL,
-  ADDRESS_LINES,
-} from "@/lib/constants";
+import { WHATSAPP_URL, MAP_URL, ADDRESS_LINES } from "@/lib/constants";
 
 const legalMatters = [
   "Civil Litigation",
@@ -58,13 +54,13 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#f8f5ef] text-[#14342f]">
-        <div className="absolute -left-28 top-10 h-72 w-72 rounded-full bg-[#b78a35]/10 blur-3xl" />
-        <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-[#14342f]/10 blur-3xl" />
+      <section className="relative overflow-hidden bg-[var(--brand-surface)] text-[var(--brand-primary)]">
+        <div className="absolute -left-28 top-10 h-72 w-72 rounded-full bg-[var(--brand-accent)]/10 blur-3xl" />
+        <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-[var(--brand-primary)]/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-20 lg:px-10 lg:pb-24 lg:pt-28">
           <div className="max-w-4xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b78a35]">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--brand-accent)]">
               Request a consultation
             </p>
 
@@ -72,21 +68,21 @@ export default function ContactPage() {
               Tell us how we may assist you.
             </h1>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#14342f]/65">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--brand-primary)]/65">
               Share a few details about your legal matter. Our office will
-              review your enquiry and contact you regarding the appropriate
-              next step.
+              review your enquiry and contact you regarding the appropriate next
+              step.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-white pb-24 text-[#14342f] sm:pb-32">
+      <section className="bg-white pb-24 text-[var(--brand-primary)] sm:pb-32">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-10">
-          <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-6 shadow-2xl shadow-[#14342f]/5 sm:p-10">
+          <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-6 shadow-2xl shadow-[var(--brand-primary)]/5 sm:p-10">
             <div className="mb-10 flex items-start justify-between gap-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                   Client enquiry
                 </p>
 
@@ -95,12 +91,12 @@ export default function ContactPage() {
                 </h2>
               </div>
 
-              <div className="hidden rounded-full border border-[#14342f]/10 bg-[#f8f5ef] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#14342f]/55 sm:block">
+              <div className="hidden rounded-full border border-[var(--brand-primary)]/10 bg-[var(--brand-surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--brand-primary)]/55 sm:block">
                 Confidential
               </div>
             </div>
 
-            <p className="mb-8 max-w-2xl leading-7 text-[#14342f]/60">
+            <p className="mb-8 max-w-2xl leading-7 text-[var(--brand-primary)]/60">
               Please avoid including highly confidential, sensitive, or
               time-critical information in this initial enquiry.
             </p>
@@ -114,9 +110,9 @@ export default function ContactPage() {
             {submitted ? (
               <div
                 role="status"
-                className="rounded-3xl border border-[#b78a35]/25 bg-[#f8f5ef] p-8 sm:p-10"
+                className="rounded-3xl border border-[var(--brand-accent)]/25 bg-[var(--brand-surface)] p-8 sm:p-10"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#14342f] text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-primary)] text-white">
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 24 24"
@@ -131,7 +127,7 @@ export default function ContactPage() {
                   </svg>
                 </div>
 
-                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                   Submission received
                 </p>
 
@@ -139,7 +135,7 @@ export default function ContactPage() {
                   Your consultation request has been submitted.
                 </h3>
 
-                <p className="mt-4 max-w-xl leading-7 text-[#14342f]/65">
+                <p className="mt-4 max-w-xl leading-7 text-[var(--brand-primary)]/65">
                   Our team will review your enquiry and contact you regarding
                   the appropriate next step. For immediate assistance, please
                   call or contact the office through WhatsApp.
@@ -153,7 +149,7 @@ export default function ContactPage() {
                       const form = document.querySelector("form");
                       if (form) form.reset();
                     }}
-                    className="rounded-full border border-[#14342f]/20 px-6 py-3 text-sm font-semibold transition hover:border-[#14342f] hover:bg-white"
+                    className="rounded-full border border-[var(--brand-primary)]/20 px-6 py-3 text-sm font-semibold transition hover:border-[var(--brand-primary)] hover:bg-white"
                   >
                     Submit another enquiry
                   </button>
@@ -162,7 +158,7 @@ export default function ContactPage() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[#25D366] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#1ebe5d]"
+                    className="rounded-full bg-[var(--brand-accent-strong)] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[var(--brand-accent)]"
                   >
                     Message on WhatsApp
                   </a>
@@ -254,12 +250,12 @@ export default function ContactPage() {
                   />
                 </FormField>
 
-                <label className="flex items-start gap-3 rounded-2xl border border-[#14342f]/10 bg-[#f8f5ef] p-4 text-sm leading-6 text-[#14342f]/65">
+                <label className="flex items-start gap-3 rounded-2xl border border-[var(--brand-primary)]/10 bg-[var(--brand-surface)] p-4 text-sm leading-6 text-[var(--brand-primary)]/65">
                   <input
                     type="checkbox"
                     name="consent"
                     required
-                    className="mt-1 h-4 w-4 shrink-0 accent-[#14342f]"
+                    className="mt-1 h-4 w-4 shrink-0 accent-[var(--brand-primary)]"
                   />
 
                   <span>
@@ -269,15 +265,15 @@ export default function ContactPage() {
                   </span>
                 </label>
 
-                <div className="flex flex-col gap-4 border-t border-[#14342f]/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm leading-6 text-[#14342f]/45">
+                <div className="flex flex-col gap-4 border-t border-[var(--brand-primary)]/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm leading-6 text-[var(--brand-primary)]/45">
                     Required fields must be completed before submission.
                   </p>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="inline-flex items-center justify-center rounded-full bg-[#14342f] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#b78a35] disabled:opacity-60"
+                    className="inline-flex items-center justify-center rounded-full bg-[var(--brand-primary)] px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--brand-accent)] disabled:opacity-60"
                   >
                     {loading ? "Submitting..." : "Submit Consultation Request"}
                   </button>
@@ -287,8 +283,8 @@ export default function ContactPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-[2rem] bg-[#14342f] p-8 text-white shadow-2xl shadow-[#14342f]/10 sm:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d6b56c]">
+            <div className="rounded-[2rem] bg-[var(--brand-primary)] p-8 text-white shadow-2xl shadow-[var(--brand-primary)]/10 sm:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent-light)]">
                 Direct contact
               </p>
 
@@ -309,7 +305,7 @@ export default function ContactPage() {
 
                   <a
                     href="tel:+919036931203"
-                    className="mt-2 block text-xl font-semibold transition hover:text-[#d6b56c]"
+                    className="mt-2 block text-xl font-semibold transition hover:text-[var(--brand-accent-light)]"
                   >
                     +91 90369 31203
                   </a>
@@ -333,7 +329,7 @@ export default function ContactPage() {
                     href={MAP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#d6b56c] transition hover:text-white"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-accent-light)] transition hover:text-white"
                   >
                     View on Google Maps
                     <span aria-hidden="true">→</span>
@@ -356,7 +352,7 @@ export default function ContactPage() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1ebe5d]"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--brand-accent-strong)] px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--brand-accent)]"
                 >
                   Message on WhatsApp
                 </a>
@@ -372,27 +368,36 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-[#14342f]/10 bg-[#f8f5ef] p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+            <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-[var(--brand-surface)] p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                 Important notice
               </p>
 
-              <p className="mt-5 leading-7 text-[#14342f]/65">
+              <p className="mt-5 leading-7 text-[var(--brand-primary)]/65">
                 Sending an enquiry does not guarantee representation. A
                 lawyer-client relationship begins only after the firm confirms
                 the engagement in writing.
               </p>
             </div>
 
-            <div className="rounded-[2rem] border border-[#14342f]/10 bg-white p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b78a35]">
+            <div className="rounded-[2rem] border border-[var(--brand-primary)]/10 bg-white p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                 What happens next
               </p>
 
               <ol className="mt-6 space-y-5">
-                <Step number="01" text="Your enquiry is reviewed by the office." />
-                <Step number="02" text="A team member contacts you regarding availability." />
-                <Step number="03" text="A consultation is scheduled when appropriate." />
+                <Step
+                  number="01"
+                  text="Your enquiry is reviewed by the office."
+                />
+                <Step
+                  number="02"
+                  text="A team member contacts you regarding availability."
+                />
+                <Step
+                  number="03"
+                  text="A consultation is scheduled when appropriate."
+                />
               </ol>
             </div>
           </aside>
@@ -415,7 +420,7 @@ function FormField({
     <div>
       <label
         htmlFor={htmlFor}
-        className="mb-2 block text-sm font-semibold text-[#14342f]"
+        className="mb-2 block text-sm font-semibold text-[var(--brand-primary)]"
       >
         {label}
       </label>
@@ -425,20 +430,14 @@ function FormField({
   );
 }
 
-function Step({
-  number,
-  text,
-}: {
-  number: string;
-  text: string;
-}) {
+function Step({ number, text }: { number: string; text: string }) {
   return (
     <li className="flex gap-4">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#14342f] text-xs font-semibold text-white">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--brand-primary)] text-xs font-semibold text-white">
         {number}
       </span>
 
-      <p className="pt-1 leading-7 text-[#14342f]/65">{text}</p>
+      <p className="pt-1 leading-7 text-[var(--brand-primary)]/65">{text}</p>
     </li>
   );
 }

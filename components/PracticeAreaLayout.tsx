@@ -12,13 +12,13 @@ export default function PracticeAreaLayout({
   process: { step: string; description: string }[];
 }) {
   return (
-    <section className="bg-[#f8f5ef] text-[#14342f]">
+    <section className="bg-surface text-ink">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="flex items-center gap-4">
-          <span className="h-px w-12 bg-[#b78a35]" />
+          <span className="h-px w-12 bg-accent" />
           <Link
             href="/practice-areas"
-            className="text-xs font-semibold uppercase tracking-[0.3em] text-[#9a712b] transition hover:text-[#b78a35]"
+            className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong transition hover:text-accent"
           >
             Practice Areas
           </Link>
@@ -28,18 +28,16 @@ export default function PracticeAreaLayout({
           {title}
         </h1>
 
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-[#14342f]/65">
-          {intro}
-        </p>
+        <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">{intro}</p>
       </div>
 
-      <div className="border-t border-[#14342f]/10 bg-white">
+      <div className="border-t border-primary/10 bg-surface-strong">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-[1fr_1fr]">
             <div>
               <div className="flex items-center gap-4">
-                <span className="h-px w-12 bg-[#b78a35]" />
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#9a712b]">
+                <span className="h-px w-12 bg-accent" />
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong">
                   What we handle
                 </p>
               </div>
@@ -54,9 +52,9 @@ export default function PracticeAreaLayout({
                       {section.items.map((item) => (
                         <li
                           key={item}
-                          className="flex items-start gap-3 text-[#14342f]/70"
+                          className="flex items-start gap-3 text-muted"
                         >
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#b78a35]" />
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                           {item}
                         </li>
                       ))}
@@ -67,8 +65,8 @@ export default function PracticeAreaLayout({
             </div>
 
             <div>
-              <div className="sticky top-32 rounded-[2rem] bg-[#14342f] p-8 text-white sm:p-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d6b56c]">
+              <div className="sticky top-32 rounded-[2rem] bg-primary p-8 text-on-primary sm:p-10">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-light">
                   Our approach
                 </p>
 
@@ -79,14 +77,12 @@ export default function PracticeAreaLayout({
                 <ol className="mt-8 space-y-5">
                   {process.map((item, index) => (
                     <li key={index} className="flex gap-4">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d6b56c] text-xs font-semibold text-[#14342f]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-light text-xs font-semibold text-ink">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <div>
-                        <p className="font-semibold text-white">
-                          {item.step}
-                        </p>
-                        <p className="mt-1 text-sm leading-6 text-white/65">
+                        <p className="font-semibold text-white">{item.step}</p>
+                        <p className="mt-1 text-sm leading-6 text-on-primary-muted">
                           {item.description}
                         </p>
                       </div>
@@ -96,12 +92,12 @@ export default function PracticeAreaLayout({
 
                 <Link
                   href="/contact"
-                  className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-[#d6b56c] px-6 py-4 text-sm font-semibold text-[#14342f] transition duration-300 hover:bg-white"
+                  className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-accent-light px-6 py-4 text-sm font-semibold text-ink transition duration-300 hover:bg-surface-strong"
                 >
                   Book Consultation
                 </Link>
 
-                <p className="mt-4 text-center text-xs text-white/40">
+                <p className="mt-4 text-center text-xs text-on-primary-muted/80">
                   No obligation. Confidential enquiry.
                 </p>
               </div>

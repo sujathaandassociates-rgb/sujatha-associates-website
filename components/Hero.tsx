@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import {
   WHATSAPP_URL,
   PHONE_NUMBER,
@@ -9,15 +9,15 @@ import {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#f8f5ef] text-[#14342f]">
-      <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#b78a35]/10 blur-3xl" />
-      <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-[#14342f]/10 blur-3xl" />
+    <section className="relative overflow-hidden bg-surface text-ink">
+      <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+      <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="relative mx-auto grid min-h-[760px] max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-10 lg:py-24">
         <div>
           <div className="flex items-center gap-4">
-            <span className="h-px w-12 bg-[#a87928]" />
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#8a641f]">
+            <span className="h-px w-12 bg-accent" />
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong">
               Trusted legal representation
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function Hero() {
             <br />
             built on
             <br />
-            <span className="font-serif font-normal italic text-[#9a712b]">
+            <span className="font-serif font-normal italic text-accent-strong">
               integrity
             </span>{" "}
             and
@@ -35,7 +35,7 @@ export default function Hero() {
             experience.
           </h1>
 
-          <p className="mt-8 max-w-xl text-lg leading-8 text-[#36534d]">
+          <p className="mt-8 max-w-xl text-lg leading-8 text-muted">
             Sujatha and Associates provides thoughtful, dependable and
             client-focused legal representation for individuals, families and
             businesses.
@@ -44,7 +44,7 @@ export default function Hero() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#14342f] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-[#14342f]/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#9a712b]"
+              className="inline-flex items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-on-primary shadow-lg shadow-primary/15 transition duration-300 hover:-translate-y-0.5 hover:bg-primary-raised"
             >
               Book Consultation
               <span aria-hidden="true">→</span>
@@ -52,7 +52,7 @@ export default function Hero() {
 
             <Link
               href="/practice-areas"
-              className="inline-flex items-center justify-center rounded-full border border-[#14342f]/30 px-8 py-4 text-sm font-semibold text-[#14342f] transition duration-300 hover:-translate-y-0.5 hover:border-[#14342f] hover:bg-white"
+              className="inline-flex items-center justify-center rounded-full border border-primary/30 px-8 py-4 text-sm font-semibold text-ink transition duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-surface-strong"
             >
               Explore Practice Areas
             </Link>
@@ -60,23 +60,15 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#d6b56c]/35 bg-[#14342f] p-8 text-white shadow-2xl shadow-[#14342f]/25 sm:p-10">
-            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#d6b56c]/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-accent/35 bg-primary p-8 text-on-primary shadow-2xl shadow-primary/25 sm:p-10">
+            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
 
             <div className="relative">
-              <div className="flex justify-center">
-                <div className="rounded-2xl bg-[#f8f5ef]/10 p-4">
-                  <Image
-                    src="/sujatha-logo.png"
-                    alt="Sujatha and Associates"
-                    width={140}
-                    height={56}
-                    className="h-12 w-auto object-contain"
-                  />
-                </div>
+              <div className="flex justify-center px-2 pt-1">
+                <Logo className="max-w-[300px] text-accent-light" />
               </div>
 
-              <div className="mt-8 divide-y divide-white/15 border-y border-white/15">
+              <div className="mt-10 divide-y divide-white/15 border-y border-white/15">
                 <ContactRow
                   label="Call Us"
                   value={PHONE_NUMBER}
@@ -93,7 +85,7 @@ export default function Hero() {
                 />
 
                 <div className="flex gap-4 py-6">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#e1c27c]">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent-light">
                     <LocationIcon />
                   </div>
 
@@ -115,7 +107,7 @@ export default function Hero() {
                       href={MAP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#e1c27c] transition hover:text-white"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-light transition hover:text-on-primary"
                     >
                       View on Google Maps
                       <span aria-hidden="true">→</span>
@@ -126,7 +118,7 @@ export default function Hero() {
 
               <Link
                 href="/contact"
-                className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#d6b56c] px-6 py-4 text-sm font-semibold text-[#14342f] transition duration-300 hover:bg-white"
+                className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-accent-light px-6 py-4 text-sm font-semibold text-ink transition duration-300 hover:bg-surface-strong"
               >
                 Request a Consultation
               </Link>
@@ -158,7 +150,7 @@ function ContactRow({
       rel={external ? "noopener noreferrer" : undefined}
       className="group flex items-center gap-4 py-6"
     >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#e1c27c] transition group-hover:bg-[#d6b56c] group-hover:text-[#14342f]">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent-light transition group-hover:bg-accent-light group-hover:text-ink">
         {icon}
       </div>
 

@@ -1,9 +1,9 @@
 export default function OurApproachPage() {
   return (
-    <section className="bg-[#14342f] text-white">
+    <section className="bg-primary text-on-primary">
       <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-2 lg:px-10">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#d6b56c]">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-light">
             Our approach
           </p>
 

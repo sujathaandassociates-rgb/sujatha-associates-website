@@ -24,31 +24,31 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-[#14342f]/10 bg-[#f8f5ef]">
+      <section className="border-b border-primary/10 bg-surface">
         <div className="mx-auto grid min-h-[650px] max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-10">
           <div>
             <div className="mb-8 flex items-center gap-3">
-              <span className="h-px w-12 bg-[#b78a35]" />
+              <span className="h-px w-12 bg-accent" />
 
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b78a35]">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong">
                 About our firm
               </p>
             </div>
 
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#14342f] sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.05] tracking-[-0.04em] text-ink sm:text-6xl lg:text-7xl">
               Thoughtful legal representation built around{" "}
-              <span className="italic text-[#b78a35]">people</span>.
+              <span className="italic text-accent-strong">people</span>.
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#14342f]/65">
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-muted">
               Sujatha and Associates is committed to providing clear,
               responsible and client-focused legal support across a broad range
               of legal matters.
             </p>
           </div>
 
-          <div className="rounded-[2rem] bg-[#14342f] p-8 text-white shadow-2xl shadow-[#14342f]/15 sm:p-10">
-            <p className="text-xs uppercase tracking-[0.28em] text-[#d6b56c]">
+          <div className="rounded-[2rem] bg-primary p-8 text-on-primary shadow-2xl shadow-primary/15 sm:p-10">
+            <p className="text-xs uppercase tracking-[0.28em] text-accent-light">
               Our philosophy
             </p>
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
             </blockquote>
 
             <div className="mt-12 border-t border-white/15 pt-6">
-              <p className="text-sm text-white/55">
+              <p className="text-sm text-on-primary-muted">
                 Sujatha and Associates
               </p>
             </div>
@@ -66,20 +66,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-surface-strong py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:px-10">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b78a35]">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong">
               Who we are
             </p>
 
-            <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.03em] text-[#14342f] sm:text-5xl">
+            <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.03em] text-ink sm:text-5xl">
               A legal practice grounded in clarity and professional
               responsibility.
             </h2>
           </div>
 
-          <div className="space-y-6 text-lg leading-8 text-[#14342f]/65">
+          <div className="space-y-6 text-lg leading-8 text-muted">
             <p>
               Our approach is based on understanding the client’s situation,
               identifying the most important legal and practical issues and
@@ -94,49 +94,47 @@ export default function AboutPage() {
             </p>
 
             <p>
-              We believe clients should understand their legal options. Our
-              role is not only to represent them, but also to explain the
-              process, risks and possible next steps in clear language.
+              We believe clients should understand their legal options. Our role
+              is not only to represent them, but also to explain the process,
+              risks and possible next steps in clear language.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#f8f5ef] py-24 sm:py-32">
+      <section className="bg-surface py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b78a35]">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-strong">
               Our values
             </p>
 
-            <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.03em] text-[#14342f] sm:text-5xl">
+            <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.03em] text-ink sm:text-5xl">
               The principles that guide our work.
             </h2>
           </div>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-[#14342f]/10 bg-[#14342f]/10 md:grid-cols-3">
+          <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-primary/10 bg-primary/10 md:grid-cols-3">
             {values.map((value) => (
-              <article key={value.title} className="bg-[#f8f5ef] p-9 sm:p-10">
-                <p className="text-xs tracking-[0.25em] text-[#b78a35]">
+              <article key={value.title} className="bg-surface p-9 sm:p-10">
+                <p className="text-xs tracking-[0.25em] text-accent-strong">
                   {value.number}
                 </p>
 
-                <h3 className="mt-14 text-3xl font-semibold text-[#14342f]">
+                <h3 className="mt-14 text-3xl font-semibold text-ink">
                   {value.title}
                 </h3>
 
-                <p className="mt-5 leading-7 text-[#14342f]/65">
-                  {value.description}
-                </p>
+                <p className="mt-5 leading-7 text-muted">{value.description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#14342f] py-24 text-white sm:py-28">
+      <section className="bg-primary py-24 text-on-primary sm:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#d6b56c]">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-light">
             Start a conversation
           </p>
 
@@ -144,14 +142,14 @@ export default function AboutPage() {
             Speak with our team about your legal matter.
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/60">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-on-primary-muted">
             Contact the office to request a consultation and discuss the next
             appropriate step.
           </p>
 
           <Link
             href="/contact"
-            className="mt-10 inline-flex rounded-full bg-[#d6b56c] px-8 py-4 text-sm font-semibold text-[#14342f] transition hover:bg-white"
+            className="mt-10 inline-flex rounded-full bg-accent-light px-8 py-4 text-sm font-semibold text-ink transition hover:bg-surface-strong"
           >
             Request a Consultation
           </Link>

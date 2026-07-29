@@ -6,7 +6,7 @@ export default function FloatingContact() {
       <a
         href={`tel:+91${PHONE_RAW}`}
         aria-label="Call Sujatha and Associates"
-        className="flex h-12 items-center gap-2 rounded-full bg-[#11271f] px-4 text-sm font-semibold text-white shadow-xl transition hover:-translate-y-1 hover:bg-[#a77b2d]"
+        className="flex h-12 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-on-primary shadow-xl transition hover:-translate-y-1 hover:bg-primary-raised"
       >
         <svg
           aria-hidden="true"
@@ -24,7 +24,7 @@ export default function FloatingContact() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Sujatha and Associates on WhatsApp"
-        className="flex h-14 items-center gap-3 rounded-full bg-[#25D366] px-4 text-sm font-semibold text-white shadow-xl transition hover:-translate-y-1 hover:bg-[#1ebe5d]"
+        className="flex h-14 items-center gap-3 rounded-full bg-accent-strong px-4 text-sm font-semibold text-on-primary shadow-xl transition hover:-translate-y-1 hover:bg-accent"
       >
         <svg
           aria-hidden="true"
