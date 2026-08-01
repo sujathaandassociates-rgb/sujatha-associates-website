@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-
-const SECRET = new TextEncoder().encode(
-  process.env.NEXTAUTH_SECRET || "sujatha-associates-secret-change-in-production"
-);
-
-const COOKIE_NAME = "sa-session";
+import { COOKIE_NAME, getJwtSecret } from "@/lib/session";
 
 export async function proxy(request: NextRequest) {
   const url = request.nextUrl;
@@ -22,7 +17,7 @@ export async function proxy(request: NextRequest) {
     }
 
     try {
-      await jwtVerify(token, SECRET);
+      await jwtVerify(token, getJwtSecret());
       return NextResponse.next();
     } catch {
       return NextResponse.redirect(new URL("/dashboard/login", request.url));

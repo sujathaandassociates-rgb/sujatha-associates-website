@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { WHATSAPP_URL, MAP_URL, ADDRESS_LINES } from "@/lib/constants";
 
 const legalMatters = [
@@ -17,6 +17,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,6 +35,8 @@ export default function ContactPage() {
           name: formData.get("fullName"),
           phone: formData.get("phone"),
           email: formData.get("email"),
+          preferredDate: formData.get("preferredDate"),
+          preferredTime: formData.get("preferredTime"),
           practiceArea: formData.get("legalMatter"),
           message: formData.get("message"),
         }),
@@ -146,8 +149,7 @@ export default function ContactPage() {
                     type="button"
                     onClick={() => {
                       setSubmitted(false);
-                      const form = document.querySelector("form");
-                      if (form) form.reset();
+                      formRef.current?.reset();
                     }}
                     className="rounded-full border border-[var(--brand-primary)]/20 px-6 py-3 text-sm font-semibold transition hover:border-[var(--brand-primary)] hover:bg-white"
                   >
@@ -165,7 +167,7 @@ export default function ContactPage() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   <FormField label="Full name" htmlFor="fullName">
                     <input
@@ -233,6 +235,20 @@ export default function ContactPage() {
                       type="date"
                       className="form-input"
                     />
+                  </FormField>
+
+                  <FormField label="Preferred time" htmlFor="preferredTime">
+                    <select
+                      id="preferredTime"
+                      name="preferredTime"
+                      defaultValue=""
+                      className="form-input"
+                    >
+                      <option value="">No preference</option>
+                      <option value="Morning">Morning</option>
+                      <option value="Afternoon">Afternoon</option>
+                      <option value="Evening">Evening</option>
+                    </select>
                   </FormField>
                 </div>
 

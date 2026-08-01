@@ -2,8 +2,27 @@ import { NextResponse } from "next/server";
 import { createSession, deleteSession, verifyCredentials } from "@/lib/auth";
 
 export async function POST(request: Request) {
+  let body: Record<string, unknown>;
+
   try {
-    const body = await request.json();
+    const parsed: unknown = await request.json();
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return NextResponse.json(
+        { error: "Invalid request body." },
+        { status: 400 }
+      );
+    }
+
+    body = parsed as Record<string, unknown>;
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 }
+    );
+  }
+
+  try {
     const { email, password, action } = body;
 
     if (action === "logout") {
@@ -18,18 +37,23 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!verifyCredentials(email, password)) {
+    if (typeof email !== "string" || typeof password !== "string") {
+      return NextResponse.json(
+        { error: "Email and password are required." },
+        { status: 400 }
+      );
+    }
+
+    const admin = await verifyCredentials(email, password);
+
+    if (!admin) {
       return NextResponse.json(
         { error: "Invalid email or password." },
         { status: 401 }
       );
     }
 
-    await createSession({
-      id: "1",
-      email,
-      name: "Admin",
-    });
+    await createSession(admin);
 
     return NextResponse.json({ success: true });
   } catch {

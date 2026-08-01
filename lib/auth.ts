@@ -1,11 +1,8 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-
-const SECRET = new TextEncoder().encode(
-  process.env.NEXTAUTH_SECRET || "sujatha-associates-secret-change-in-production"
-);
-
-const COOKIE_NAME = "sa-session";
+import bcrypt from "bcryptjs";
+import { getPrisma } from "@/lib/prisma";
+import { COOKIE_NAME, getJwtSecret } from "@/lib/session";
 
 export interface SessionUser {
   id: string;
@@ -18,7 +15,7 @@ export async function createSession(user: SessionUser) {
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("24h")
-    .sign(SECRET);
+    .sign(getJwtSecret());
 
   const store = await cookies();
   store.set(COOKIE_NAME, token, {
@@ -36,7 +33,7 @@ export async function getSession(): Promise<SessionUser | null> {
     const token = store.get(COOKIE_NAME)?.value;
     if (!token) return null;
 
-    const { payload } = await jwtVerify(token, SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     const user = payload.user as SessionUser | undefined;
     return user || null;
   } catch {
@@ -49,8 +46,14 @@ export async function deleteSession() {
   store.delete(COOKIE_NAME);
 }
 
-export function verifyCredentials(email: string, password: string): boolean {
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@sujathaassociates.com";
-  const adminPassword = process.env.ADMIN_PASSWORD || "change-this-password";
-  return email === adminEmail && password === adminPassword;
+export async function verifyCredentials(email: string, password: string) {
+  const admin = await getPrisma().admin.findUnique({
+    where: { email: email.trim().toLowerCase() },
+  });
+
+  if (!admin || !(await bcrypt.compare(password, admin.hashedPassword))) {
+    return null;
+  }
+
+  return { id: admin.id, email: admin.email, name: admin.name };
 }

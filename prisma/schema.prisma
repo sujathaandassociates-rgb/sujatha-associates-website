@@ -5,7 +5,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("qgehkdufuodlyvfoessj")
 }
 
 model Booking {
@@ -27,8 +26,8 @@ model Booking {
 }
 
 model Admin {
-  id             String @id @default(cuid())
-  email          String @unique
+  id             String   @id @default(cuid())
+  email          String   @unique
   hashedPassword String
   name           String
   createdAt      DateTime @default(now())

@@ -1,37 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sujatha & Associates
 
-## Getting Started
+Marketing website and consultation-request dashboard for Sujatha & Associates.
 
-First, run the development server:
+## Local setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install dependencies with `npm install`.
+2. Copy `.env.example` to `.env` and supply the required values:
+   - `DATABASE_URL`: PostgreSQL connection string.
+   - `JWT_SECRET`: a long, random secret used to sign dashboard sessions.
+   - `ADMIN_EMAIL` and `ADMIN_PASSWORD`: credentials for the initial dashboard administrator.
+3. Apply the database schema with `npm run db:deploy`.
+4. Create or update the administrator account with `npm run db:seed`.
+5. Start the application with `npm run dev`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The public consultation form is available at `/contact`. Administrators sign in at `/dashboard/login` and can review and update requests at `/dashboard`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set `DATABASE_URL` and `JWT_SECRET` in the deployment provider. Run `npm run db:deploy` against the production database before deployment, then provision the administrator by running `npm run db:seed` with `ADMIN_EMAIL` and `ADMIN_PASSWORD` set in a secure environment. Do not add administrator credentials to source control.
 
-## Learn More
+## Verification
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# sujatha-associates-website" 
+- `npm run lint`
+- `npm run db:validate`
+- `npm run build`

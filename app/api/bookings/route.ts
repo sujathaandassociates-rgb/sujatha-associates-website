@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
 import { getPrisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
+
   try {
     const prisma = getPrisma();
     const bookings = await prisma.booking.findMany({
@@ -12,19 +17,49 @@ export async function GET() {
     return NextResponse.json(bookings);
   } catch {
     return NextResponse.json(
-      { error: "Database not configured. Please set up DATABASE_URL." },
-      { status: 503 }
+      { error: "Unable to load bookings." },
+      { status: 500 }
     );
   }
 }
 
 export async function POST(request: Request) {
+  let body: Record<string, unknown>;
+
+  try {
+    const parsed: unknown = await request.json();
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return NextResponse.json(
+        { error: "Invalid request body." },
+        { status: 400 }
+      );
+    }
+
+    body = parsed as Record<string, unknown>;
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 }
+    );
+  }
+
   try {
     const prisma = getPrisma();
-    const body = await request.json();
     const { name, phone, email, preferredDate, preferredTime, practiceArea, message } = body;
 
-    if (!name || !phone || !email || !practiceArea || !message) {
+    if (
+      typeof name !== "string" ||
+      !name.trim() ||
+      typeof phone !== "string" ||
+      !phone.trim() ||
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof practiceArea !== "string" ||
+      !practiceArea.trim() ||
+      typeof message !== "string" ||
+      !message.trim()
+    ) {
       return NextResponse.json(
         { error: "Missing required fields." },
         { status: 400 }
@@ -33,13 +68,19 @@ export async function POST(request: Request) {
 
     const booking = await prisma.booking.create({
       data: {
-        name,
-        phone,
-        email,
-        preferredDate: preferredDate || null,
-        preferredTime: preferredTime || null,
-        practiceArea,
-        message,
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim().toLowerCase(),
+        preferredDate:
+          typeof preferredDate === "string" && preferredDate.trim()
+            ? preferredDate.trim()
+            : null,
+        preferredTime:
+          typeof preferredTime === "string" && preferredTime.trim()
+            ? preferredTime.trim()
+            : null,
+        practiceArea: practiceArea.trim(),
+        message: message.trim(),
       },
     });
 
